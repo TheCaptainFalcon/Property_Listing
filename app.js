@@ -3,7 +3,7 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
     mongoose = require('mongoose'),
-    keys = require('./config/keys');
+    keys = require('./config/dev');
 
 
 const indexRouter = require('./routes/index'),
