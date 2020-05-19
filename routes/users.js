@@ -2,7 +2,8 @@ const express = require('express'),
   router = express.Router(),
   bcrypt = require('bcrypt'),
   jwt = require('jsonwebtoken'),
-  keys = require('../config/dev')
+  keys = require('../config/dev'),
+  passport = require('passport');
 
 const UserModel = require('../models/UserModel');
 
@@ -50,19 +51,27 @@ router.post('/login', function (req, res) {
           if(isMatch) {
 
             const payload = { id: user.id, name: user.name }
-            jwt.sign(payload, keys.secret, { expiresIn: 86400 }, () => {
+            jwt.sign(payload, keys.secret, { expiresIn: 86400 },
               (err, token) => {
                 res.json({
                   success: true,
                   token: 'Bearer ' + token
                 });
               }
-            });
+            );
           } else {
             return res.status(400).json({ password: 'Invalid password' });
           }
         });
     });
+});
+
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
+  })
 });
 
 module.exports = router;

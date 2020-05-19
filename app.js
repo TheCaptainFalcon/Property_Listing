@@ -3,7 +3,8 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
     mongoose = require('mongoose'),
-    keys = require('./config/dev');
+    keys = require('./config/dev'),
+    passport = require('passport')
 
 
 const indexRouter = require('./routes/index'),
@@ -21,5 +22,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 mongoose.connect(keys.mongoURI);
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
+
+
 
 module.exports = app;
