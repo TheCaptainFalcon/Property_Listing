@@ -19,7 +19,7 @@ router.post('/register', function(req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if(!isValid) {
-    return res.staus(400).json(errors);
+    return res.status(400).json(errors);
   }
 
   UserModel.findOne({ email: req.body.email })
@@ -51,7 +51,7 @@ router.post('/login', function (req, res) {
   const { errors, isValid } = validateLoginInput(req.body);
 
   if(!isValid) {
-    return res.staus(400).json(errors);
+    return res.status(400).json(errors);
   }
 
   const email = req.body.email;
