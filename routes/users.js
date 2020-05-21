@@ -5,6 +5,9 @@ const express = require('express'),
   keys = require('../config/dev'),
   passport = require('passport');
 
+const validateRegisterInput = require('../validation/register');
+const validateLoginInput = require('../validation/login');
+
 const UserModel = require('../models/UserModel');
 
 /* GET users listing. */
@@ -13,10 +16,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/register', function(req, res) {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if(!isValid) {
+    return res.staus(400).json(errors);
+  }
+
   UserModel.findOne({ email: req.body.email })
     .then(user => {
       if(user) {
-        return res.status(400).json({ email: 'Email already taken' });
+        errors.email = 'Email already taken';
+        return res.status(400).json(errors);
       } else {
         const newUser = new UserModel({
           name: req.body.name,
@@ -38,12 +48,19 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/login', function (req, res) {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if(!isValid) {
+    return res.staus(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
   UserModel.findOne({ email: email })
     .then(user => {
       if(!user) {
+        errors.email = "User not found";
         return res.status(404).json({email: 'User not found'})
       }
       bcrypt.compare(password, user.password)
@@ -60,7 +77,8 @@ router.post('/login', function (req, res) {
               }
             );
           } else {
-            return res.status(400).json({ password: 'Invalid password' });
+            errors.password = 'Invalid password'
+            return res.status(400).json(errors);
           }
         });
     });
