@@ -9,7 +9,8 @@ const express = require('express'),
 
 const indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users');
-
+    listingsRouter = require('./routes/listings');
+    
 const app = express();
 
 app.use(logger('dev'));
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use ('/listings', listingsRouter);
 
 mongoose.connect(keys.mongoURI);
 
