@@ -8,6 +8,28 @@ const validateListingInput = require('../validation/listing');
 
 router.get('/test', (req, res) => res.json({ msg: 'Listing works'}));
 
+router.get('/', (req, res) => {
+    ListingModel.find()
+        .sort({date: -1})
+        .then(listings => res.json(listings))
+        .catch(err => res.status(404).json({ nolistingsfound: "No listings found"}));
+});
+
+router.get('/:id', (req, res) => {
+    ListingModel.findById(req.params.id)
+    .then(listing => res.json(listing))
+    .catch(err => res.status(404).json({ nolistingfound: "No listing found with that ID"}));
+});
+
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    ListingModel.findById(req.params.id)
+        .then(listing => {
+            listing.remove().then(() => res.json({ success: true }));
+        })
+    .catch(err => res.status(404).json({ listingStatus: 'No listing found' }));
+})
+
+
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     const { errors, isValid } = validateListingInput(req.body);
 
