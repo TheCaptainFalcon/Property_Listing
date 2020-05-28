@@ -5,17 +5,17 @@ import jwt_decode from 'jwt-decode';
 
 export const registerUser = (userData, history) => dispatch => {
     axios.post('http://localhost:5000/users/register', userData)
-        .then(res => history.push('/login')
+        .then(res => history.push('/users/login'))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
             })
-        ));
+        );
 };
 
 export const loginUser = (userData) => dispatch => {
-    axios.post('/http:localhost:5000/users/login', userData)
+    axios.post('http://localhost:5000/users/login', userData)
         .then(res => {
             // save to localStorage
             const { token } = res.data;
@@ -31,7 +31,7 @@ export const loginUser = (userData) => dispatch => {
         .catch(err => 
             dispatch({
                 type: GET_ERRORS,
-                payload: err.reponse.data
+                payload: err.response.data
             })
         );
 };
