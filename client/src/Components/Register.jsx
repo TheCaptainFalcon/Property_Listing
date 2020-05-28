@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../Actions/authActions';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 class Register extends Component {
     constructor(props) {
@@ -21,6 +22,12 @@ class Register extends Component {
         this.HandleSubmit = this.HandleSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({ errors: nextProps.errors })
+        }
+    }
+
     HandleSubmit(e) {
         e.preventDefault();
         const newUser = {
@@ -30,10 +37,7 @@ class Register extends Component {
             password2: this.state.password2
         }
 
-        this.props.registerUser(newUser);
-        // axios.post('http://localhost:5000/users/register', newUser)
-        //     .then(res => console.log(res.data))
-        //     .catch(err => this.setState({errors: err.response.data}))
+        this.props.registerUser(newUser, this.props.history);
     }
     
     HandleChange(e) {
@@ -46,11 +50,10 @@ class Register extends Component {
         const errors = this.state.errors;
 
         // equal to const user = this.props.auth.user
-        const { user } = this.props.auth;
+        // const { user } = this.props.auth;
 
         return (  
             <div>
-                {user ? user.name : null}
                 <p>Register for dev purposes</p>
                 <form onSubmit={this.HandleSubmit}>
                     <label/>Name
@@ -106,11 +109,13 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+    auth: state.auth,
+    errors: state.errors
 })
 
-export default connect(mapStateToProps)(null, { registerUser })(Register);
+export default connect(mapStateToProps)(null, { registerUser })(withRouter(Register));
