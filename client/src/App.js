@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css'
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
 import Home from './Components/Home';
 import Listings from './Components/Listings';
 import Login from './Components/Login';
@@ -10,6 +9,10 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser } from './Actions/authActions';
 import store from './store';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from './Actions/authActions';
+import NavComp from './Components/NavComp';
 
 // Check for token
 if(localStorage.jwtToken) {
@@ -22,30 +25,70 @@ if(localStorage.jwtToken) {
   // check if store and redux needs to be swapped to here
   // instead of index.js
   store.dispatch(setCurrentUser(decoded));
+
+  // check for expired token
+  const currentTime = Date.now() / 1000;
+  if(decoded.exp < currentTime) {
+    // logout user
+    store.dispatch(logoutUser());
+    // redirect to login
+    window.location.href = '/users/login';
+  }
 }
 
 
-function App() {
-  return (
-        <Router>
-        <Navbar className='App-nav' bg="dark" variant="dark">
-          <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/'>Home</NavLink></Nav.Link>
-          <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/listings'>Listings</NavLink></Nav.Link>
-          <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/users/login'>Login</NavLink></Nav.Link>
-          
-          <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/users/register'>Register</NavLink></Nav.Link>
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { }
+  }
+
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+  }  
+
+  render() {
+    const { isAuthenticated, user } = this.props.auth;
     
-         </Navbar>
-        <Switch>
-          <Route exact path='/' component={ Home } />
-          <Route exact path ='/listings' component={ Listings } />
-          <Route exact path ='/users/login' component={ Login } />
+    const authLinks = (
+      <ul>
+  
+      </ul>
+    )
 
-          <Route exact path ='/users/register' component={ Register } />
+    const guestLinks = (
+      <ul>
+  
+      </ul>
+    );
 
-        </Switch>
-      </Router>
-  );
+    // { isAuthenticated ? authLinks : guestLinks }  
+
+    return (
+          <Router>
+          <Switch>
+            <NavComp/>
+            <Route exact path='/' component={ Home } />
+            <Route exact path ='/listings' component={ Listings } />
+            <Route exact path ='/users/login' component={ Login } />
+
+            <Route exact path ='/users/register' component={ Register } />
+
+          </Switch>
+        </Router>
+    );
+  }
 }
 
-export default App;
+  NavComp.PropTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  }
+
+  const mapStateToProps = (state) => ({
+    auth: state.auth,
+  })
+
+export default connect(mapStateToProps, { logoutUser }) (App);

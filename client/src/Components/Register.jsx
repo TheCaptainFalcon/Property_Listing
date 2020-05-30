@@ -22,6 +22,12 @@ class Register extends Component {
         this.HandleSubmit = this.HandleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/listings');
+        }
+    }
+    
     componentWillReceiveProps(nextProps) {
         if(nextProps.errors) {
             this.setState({ errors: nextProps.errors })
