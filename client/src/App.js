@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
 import './App.css'
-import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
-import Home from './Components/Home';
-import Listings from './Components/Listings';
-import Login from './Components/Login';
-import Register from './Components/Register';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser } from './Actions/authActions';
 import store from './store';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from './Actions/authActions';
 import NavComp from './Components/NavComp';
@@ -36,59 +30,19 @@ if(localStorage.jwtToken) {
   }
 }
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { }
   }
 
-  handleLogout(e) {
-    e.preventDefault();
-    this.props.logoutUser();
-  }  
-
   render() {
-    const { isAuthenticated, user } = this.props.auth;
-    
-    const authLinks = (
-      <ul>
-  
-      </ul>
-    )
-
-    const guestLinks = (
-      <ul>
-  
-      </ul>
-    );
-
-    // { isAuthenticated ? authLinks : guestLinks }  
-
-    return (
-          <Router>
-          <Switch>
-            <NavComp/>
-            <Route exact path='/' component={ Home } />
-            <Route exact path ='/listings' component={ Listings } />
-            <Route exact path ='/users/login' component={ Login } />
-
-            <Route exact path ='/users/register' component={ Register } />
-
-          </Switch>
-        </Router>
-    );
+    return (<NavComp/>);
   }
 }
 
-  NavComp.PropTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-  }
-
-  const mapStateToProps = (state) => ({
-    auth: state.auth,
-  })
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+})
 
 export default connect(mapStateToProps, { logoutUser }) (App);
