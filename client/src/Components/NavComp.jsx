@@ -5,6 +5,7 @@ import Home from './Home';
 import Listings from './Listings';
 import Login from './Login';
 import Register from './Register';
+import Update from './Update';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../Actions/authActions';
