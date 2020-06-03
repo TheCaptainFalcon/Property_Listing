@@ -34,9 +34,9 @@ class Listings extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <td>First sample</td>
-                            <td>Second sample</td>
-                            <td>Third sample</td>
+                            <td>Title</td>
+                            <td>Text</td>
+                            <td>Date Posted</td>
                         </tr>
                     </thead>
                     <tbody>
