@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Modal, Button } from 'react-bootstrap';
+
 import Home from './Home';
 import Listings from './Listings';
 import Login from './Login';
@@ -13,16 +17,28 @@ import { logoutUser } from '../Actions/authActions';
 class NavComp extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {  
+            logoutModalShow : false
+        }
 
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleHideLogoutModal = this.handleHideLogoutModal.bind(this);
 
     }
 
     handleLogout(e) {
         e.preventDefault();
         this.props.logoutUser();
-    }
+        this.setState({
+            logoutModalShow : true
+        });
+    };
+
+    handleHideLogoutModal() {
+        this.setState({
+            logoutModalShow : false
+        });
+    };
 
     render() { 
         const { isAuthenticated, user } = this.props.auth;
@@ -46,7 +62,25 @@ class NavComp extends Component {
                 <Navbar className='App-nav' bg="dark" variant="dark">
                     <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/'>Home</NavLink></Nav.Link>
                     <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/listings'>Listings</NavLink></Nav.Link>
+
                     {isAuthenticated ? authLinks : guestLinks }
+
+                    {this.state.logoutModalShow ?  
+            
+                    <Modal show={this.handleLogout} onHide={this.handleHideLogoutModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Successfully Logged out!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Automatically redirecting in (put timer func here) </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="success" onClick={this.handleHideLogoutModal}>
+                                Confirm <FontAwesomeIcon icon={faCheck}/>
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                    : null } 
+
                 </Navbar>
                 <Switch>
                     <Route exact path='/' component={ Home } />

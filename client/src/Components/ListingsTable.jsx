@@ -64,11 +64,7 @@ class ListingsTable extends Component {
 
                 <FontAwesomeIcon onClick={this.handleShowModal} icon={faMinusCircle}/> 
 
-                : 
-
-                <FontAwesomeIcon onClick={this.handleShowUnauthModal} icon={faMinusCircle} /> 
-
-                }
+                : null }
 
                 {this.state.modalShow ?  
             
@@ -88,22 +84,6 @@ class ListingsTable extends Component {
                 </Modal>
 
                 : null } 
-                
-                {this.state.unauthModalShow ?
-                
-                <Modal show={this.handleShowUnauthModal} onHide={this.handleHideUnauthModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Unauthorized</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Only authorized users can perform this action.</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="danger" onClick={this.handleHideUnauthModal}>
-                            Go Back <FontAwesomeIcon icon={faBan} />
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-                
-                : null }
             </tr>
         );
     }
