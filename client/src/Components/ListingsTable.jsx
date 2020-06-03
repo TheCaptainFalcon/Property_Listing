@@ -4,6 +4,7 @@ import { faMinusCircle, faCheck, faBan } from '@fortawesome/free-solid-svg-icons
 import { Modal, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Axios from 'axios';
 
 class ListingsTable extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class ListingsTable extends Component {
         this.handleHideModal = this.handleHideModal.bind(this);
         this.handleShowUnauthModal = this.handleShowUnauthModal.bind(this);
         this.handleHideUnauthModal = this.handleHideUnauthModal.bind(this);
+        this.deleteListing = this.deleteListing.bind(this);
         
     }
 
@@ -44,6 +46,14 @@ class ListingsTable extends Component {
         });
     };
 
+    deleteListing() {
+        Axios.delete(`http://localhost:5000/listings/${this.props.obj._id}`)
+            .then(res => console.log(res))
+            .then(this.setState({ modalShow : false }))
+            .then(window.location.reload())
+            .catch(err => console.log(err))
+    };
+    
     render() { 
 
         const { isAuthenticated } = this.props.auth;
@@ -74,7 +84,7 @@ class ListingsTable extends Component {
                     </Modal.Header>
                     <Modal.Body>Are you sure you want to delete this listing?</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="success" onClick={this.handleHideModal}>
+                        <Button variant="success" onClick={this.deleteListing}>
                             Confirm <FontAwesomeIcon icon={faCheck}/>
                         </Button>
                         <Button variant="danger" onClick={this.handleHideModal}>

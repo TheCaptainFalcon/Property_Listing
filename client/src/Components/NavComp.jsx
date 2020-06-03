@@ -46,7 +46,7 @@ class NavComp extends Component {
         if(this.state.seconds > 0) {
             let timer = setInterval(() => this.setState({ seconds : this.state.seconds - 1 }), 1000)
             setTimeout(() => clearInterval(timer), 5000)
-            setTimeout(() => this.setState({ logoutModalShow : false }), 5000)
+            setTimeout(() => this.setState({ logoutModalShow : false, seconds: 5 }), 5000)
         } 
     };
     
@@ -58,7 +58,7 @@ class NavComp extends Component {
         const authLinks = (
             <Navbar className='App-nav' bg="dark" variant="dark">
                 <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/listings/update'>Update Listings</NavLink></Nav.Link>
-                <Nav.Link><NavLink activeClassName='active-link' exact={true} onClick={this.handleLogout} to='/'>Logout</NavLink></Nav.Link>
+                <Nav.Link><NavLink onClick={this.handleLogout} to='/'>Logout</NavLink></Nav.Link>
             </Navbar>
         );
 
@@ -95,10 +95,10 @@ class NavComp extends Component {
 
                 </Navbar>
                 <Switch>
-                    <Route exact path='/' component={ Home } />
-                    <Route exact path ='/listings' component={ Listings } />
-                    <Route exact path ='/users/login' component={ Login } />
-                    <Route exact path ='/users/register' component={ Register } />
+                    <Route exact path = '/' component={ Home } />
+                    <Route exact path = '/listings' component={ Listings } />
+                    <Route exact path = '/users/login' component={ Login } />
+                    <Route exact path = '/users/register' component={ Register } />
                     <Route exact path = '/listings/search' />
                     <Route exact path = '/listings/update' component = { Update } />
                 </Switch>
