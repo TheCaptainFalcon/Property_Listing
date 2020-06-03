@@ -36,6 +36,13 @@ class Listings extends Component {
                         <tr>
                             <td>Title</td>
                             <td>Text</td>
+                            <td>Address</td>
+                            <td>City</td>
+                            <td>State</td>
+                            <td>Zip</td>
+                            <td>BR</td>
+                            <td>BA</td>
+                            <td>Price</td>
                             <td>Date Posted</td>
                         </tr>
                     </thead>

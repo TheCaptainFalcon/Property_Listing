@@ -40,7 +40,14 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     const newListing = new ListingModel ({
         title: req.body.title,
         text: req.body.text,
-        user: req.user.id
+        user: req.user.id,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        br: req.body.br,
+        ba: req.body.ba,
+        price: req.body.price
     });
     newListing.save().then(listing => res.json(listing));
 });

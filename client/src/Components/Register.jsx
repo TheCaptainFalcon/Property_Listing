@@ -27,7 +27,8 @@ class Register extends Component {
             this.props.history.push('/listings');
         }
     }
-    
+
+    // Refactor to static getDerivedStateFromProps + ComponentDidMount for state
     componentWillReceiveProps(nextProps) {
         if(nextProps.errors) {
             this.setState({ errors: nextProps.errors })

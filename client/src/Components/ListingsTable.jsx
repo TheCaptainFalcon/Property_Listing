@@ -67,6 +67,27 @@ class ListingsTable extends Component {
                     {this.props.obj.text}
                 </td>
                 <td>
+                    {this.props.obj.address}
+                </td>
+                <td>
+                    {this.props.obj.city}
+                </td>
+                <td>
+                    {this.props.obj.state}
+                </td>
+                <td>
+                    {this.props.obj.zip}
+                </td>
+                <td>
+                    {this.props.obj.br}
+                </td>
+                <td>
+                    {this.props.obj.ba}
+                </td>
+                <td>
+                    {this.props.obj.price}
+                </td>
+                <td>
                     {this.props.obj.date}
                 </td>
 
