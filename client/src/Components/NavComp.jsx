@@ -18,11 +18,13 @@ class NavComp extends Component {
     constructor(props) {
         super(props);
         this.state = {  
-            logoutModalShow : false
+            logoutModalShow : false,
+            seconds: 5
         }
 
     this.handleLogout = this.handleLogout.bind(this);
     this.handleHideLogoutModal = this.handleHideLogoutModal.bind(this);
+    this.startTimer = this.startTimer.bind(this);
 
     }
 
@@ -40,8 +42,18 @@ class NavComp extends Component {
         });
     };
 
+    startTimer() {
+        if(this.state.seconds > 0) {
+            let timer = setInterval(() => this.setState({ seconds : this.state.seconds - 1 }), 1000)
+            setTimeout(() => clearInterval(timer), 5000)
+            setTimeout(() => this.setState({ logoutModalShow : false }), 5000)
+        } 
+    };
+    
+
     render() { 
         const { isAuthenticated, user } = this.props.auth;
+        const seconds = this.state.seconds;
 
         const authLinks = (
             <Navbar className='App-nav' bg="dark" variant="dark">
@@ -67,11 +79,11 @@ class NavComp extends Component {
 
                     {this.state.logoutModalShow ?  
             
-                    <Modal show={this.handleLogout} onHide={this.handleHideLogoutModal}>
+                    <Modal show={this.handleLogout} onHide={this.handleHideLogoutModal} onEntered={this.startTimer}>
                         <Modal.Header closeButton>
                             <Modal.Title>Successfully Logged out!</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>Automatically redirecting in (put timer func here) </Modal.Body>
+                        <Modal.Body>Automatically redirecting in {seconds} seconds... </Modal.Body>
                         <Modal.Footer>
                             <Button variant="success" onClick={this.handleHideLogoutModal}>
                                 Confirm <FontAwesomeIcon icon={faCheck}/>
