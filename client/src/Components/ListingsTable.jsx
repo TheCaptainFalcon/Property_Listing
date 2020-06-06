@@ -5,6 +5,11 @@ import { Modal, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Axios from 'axios';
+import styled from 'styled-components';
+
+const BoldTD = styled.td`
+    font-weight: bolder;
+`;
 
 class ListingsTable extends Component {
     constructor(props) {
@@ -59,63 +64,75 @@ class ListingsTable extends Component {
         const { isAuthenticated } = this.props.auth;
 
         return (  
-            <tr>
-                <td>
-                    {this.props.obj.title}
-                </td>
-                <td>
-                    {this.props.obj.text}
-                </td>
-                <td>
-                    {this.props.obj.address}
-                </td>
-                <td>
-                    {this.props.obj.city}
-                </td>
-                <td>
-                    {this.props.obj.state}
-                </td>
-                <td>
-                    {this.props.obj.zip}
-                </td>
-                <td>
-                    {this.props.obj.br}
-                </td>
-                <td>
-                    {this.props.obj.ba}
-                </td>
-                <td>
-                    {this.props.obj.price}
-                </td>
-                <td>
-                    {this.props.obj.date}
-                </td>
+            <>
+            <br/>
+                <tr>
+                    <BoldTD>Address</BoldTD>
+                    <BoldTD>City</BoldTD>
+                    <BoldTD>State</BoldTD>
+                    <BoldTD>Zip</BoldTD>
+                </tr>
+                <tr>
+                    <td>
+                        {this.props.obj.address}
+                    </td>
+                    <td>
+                        {this.props.obj.city}
+                    </td>
+                    <td>
+                        {this.props.obj.state}
+                    </td>
+                    <td>
+                        {this.props.obj.zip}
+                    </td>
+                </tr>
+                <tr>
+                    <BoldTD>BR</BoldTD>
+                    <BoldTD>BA</BoldTD>
+                    <BoldTD>Price</BoldTD>
+                    <BoldTD>Date Posted</BoldTD>
+                </tr>
+                <tr>
+                    <td>
+                        {this.props.obj.br}
+                    </td>
+                    <td>
+                        {this.props.obj.ba}
+                    </td>
+                    <td>
+                        {this.props.obj.price}
+                    </td>
+                    <td>
+                        {this.props.obj.date}
+                    </td>
 
-                { isAuthenticated ? 
+                    { isAuthenticated ? 
+                    <td style={{border: 'none'}}>
+                        <FontAwesomeIcon onClick={this.handleShowModal} icon={faMinusCircle}/> 
+                    </td>
 
-                <FontAwesomeIcon onClick={this.handleShowModal} icon={faMinusCircle}/> 
+                    : null }
 
-                : null }
+                    {this.state.modalShow ?  
+                
+                    <Modal show={this.handleShowModal} onHide={this.handleHideModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Warning!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Are you sure you want to delete this listing?</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="success" onClick={this.deleteListing}>
+                                Confirm <FontAwesomeIcon icon={faCheck}/>
+                            </Button>
+                            <Button variant="danger" onClick={this.handleHideModal}>
+                                Go Back <FontAwesomeIcon icon={faBan} />
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
 
-                {this.state.modalShow ?  
-            
-                <Modal show={this.handleShowModal} onHide={this.handleHideModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Warning!</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Are you sure you want to delete this listing?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="success" onClick={this.deleteListing}>
-                            Confirm <FontAwesomeIcon icon={faCheck}/>
-                        </Button>
-                        <Button variant="danger" onClick={this.handleHideModal}>
-                            Go Back <FontAwesomeIcon icon={faBan} />
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
-                : null } 
-            </tr>
+                    : null } 
+                </tr>
+            </>
         );
     }
 }

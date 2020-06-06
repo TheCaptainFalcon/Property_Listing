@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { createListing } from '../Actions/listingActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
