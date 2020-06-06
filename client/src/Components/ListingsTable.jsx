@@ -100,7 +100,7 @@ class ListingsTable extends Component {
                         {this.props.obj.ba}
                     </td>
                     <td>
-                        {this.props.obj.price}
+                        ${this.props.obj.price}
                     </td>
                     <td>
                         {this.props.obj.date}

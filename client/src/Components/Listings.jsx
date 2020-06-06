@@ -67,7 +67,7 @@ class Listings extends Component {
                             <Card.Img variant="top" style={{marginBottom:'2rem'}}/>
                             <Card.Body>
                                 <MainTitle>Listings Directory </MainTitle>
-                                <SubTitle>Results Found: {this.state.listingsCollection.count}</SubTitle>
+                                <SubTitle>{this.state.listingsCollection.length} Results Found</SubTitle>
                                 <Card.Text>
                                     <Table striped responsive style={{minWidth: '20rem'}}>
                                         <tbody>

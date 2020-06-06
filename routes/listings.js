@@ -29,7 +29,6 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
     .catch(err => res.status(404).json({ listingStatus: 'No listing found' }));
 })
 
-
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     const { errors, isValid } = validateListingInput(req.body);
 

@@ -40,6 +40,7 @@ class NavComp extends Component {
         this.setState({
             logoutModalShow : false
         });
+        window.location = '/listings' 
     };
 
     startTimer() {
@@ -47,6 +48,7 @@ class NavComp extends Component {
             let timer = setInterval(() => this.setState({ seconds : this.state.seconds - 1 }), 1000)
             setTimeout(() => clearInterval(timer), 5000)
             setTimeout(() => this.setState({ logoutModalShow : false, seconds: 5 }), 5000)
+            setTimeout(() => window.location = '/listings', 5000)
         } 
     };
     

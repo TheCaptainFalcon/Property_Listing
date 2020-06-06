@@ -1,7 +1,6 @@
 // Remove in production version...
 
 import React, { Component } from 'react';
-import axios from 'axios';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../Actions/authActions';
