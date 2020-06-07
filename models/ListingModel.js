@@ -39,6 +39,7 @@ const ListingSchema = new Schema({
         type: Date,
         default: Date.now
     }
+
 });
 
 module.exports = ListingModel = mongoose.model('listings', ListingSchema);
