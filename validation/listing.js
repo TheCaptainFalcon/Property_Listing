@@ -4,7 +4,7 @@ const isEmpty = require ('./is-empty');
 module.exports = function validateListingInput(data) {
     let errors = {};
 
-    data.text = !isEmpty(data.text) ? data.text : '';
+
     data.address = !isEmpty(data.address) ? data.address : '';
     data.city = !isEmpty(data.city) ? data.city : '';
     data.state = !isEmpty(data.state) ? data.state : '';
@@ -13,14 +13,7 @@ module.exports = function validateListingInput(data) {
     data.ba = !isEmpty(data.ba) ? data.ba : '';
     data.price = !isEmpty(data.price) ? data.price : '';
 
-    // Text
-    if(!Validator.isLength(data.text, { min: 10, max: 500 })) {
-        errors.text = 'Text must be between 10 and 500 characters';
-    }
 
-    if(Validator.isEmpty(data.text)) {
-        errors.text = "Text field is required";
-    }
 
     // Address
     if(!Validator.isLength(data.address, { min: 10, max: 50 })) {

@@ -37,8 +37,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     }
     
     const newListing = new ListingModel ({
-        title: req.body.title,
-        text: req.body.text,
         user: req.user.id,
         address: req.body.address,
         city: req.body.city,

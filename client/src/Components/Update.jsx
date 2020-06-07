@@ -10,8 +10,6 @@ class Update extends Component {
     constructor(props) {
         super(props);
         this.state = {  
-            title : '',
-            text: '',
             address: '',
             city: '',
             state: '',
@@ -42,8 +40,6 @@ class Update extends Component {
         e.preventDefault();
 
         const newListing = {
-            title: this.state.title,
-            text: this.state.text,
             address: this.state.address,
             city: this.state.city,
             state: this.state.state,
@@ -62,29 +58,6 @@ class Update extends Component {
         return (  
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label/>Title
-                    <input
-                        name='title'
-                        className={classnames({ 'is-invalid' : errors.text })}
-                        type='varchar'
-                        placeholder='Enter a name'
-                        value={this.state.title}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    {errors.text && (<div className="invalid-feedback">{errors.text}</div>)}
-
-                    <label/>Text
-                    <input
-                        name='text'
-                        className={classnames({ 'is-invalid' : errors.text})}
-                        type='varchar'
-                        placeholder='Enter a name'
-                        value={this.state.text}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    {errors.text && (<div className="invalid-feedback">{errors.text}</div>)}
 
                     <label/>Address
                     <input
@@ -126,7 +99,7 @@ class Update extends Component {
                     <input
                         name='zip'
                         className={classnames({ 'is-invalid' : errors.zip})}
-                        type='varchar'
+                        type='number'
                         placeholder='Enter the zipcode.'
                         value={this.state.zip}
                         onChange={this.handleChange}
