@@ -32,6 +32,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors(corsOptions));
 
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use ('/listings', listingsRouter);
@@ -45,13 +51,5 @@ if(process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
-
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-app.use(passport.initialize());
-
-require('./config/passport')(passport);
-
-
 
 module.exports = app;
