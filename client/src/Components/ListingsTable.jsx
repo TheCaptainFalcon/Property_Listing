@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Axios from 'axios';
 import styled from 'styled-components';
+import './CSS/ListingsTable.css';
 
 const BoldTD = styled.td`
     font-weight: bolder;
@@ -108,7 +109,7 @@ class ListingsTable extends Component {
 
                     { isAuthenticated ? 
                     <td style={{border: 'none'}}>
-                        <FontAwesomeIcon onClick={this.handleShowModal} icon={faMinusCircle}/> 
+                        <FontAwesomeIcon onClick={this.handleShowModal} icon={faMinusCircle} id="deleteIcon"/> 
                     </td>
 
                     : null }

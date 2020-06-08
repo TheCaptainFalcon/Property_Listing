@@ -74,7 +74,6 @@ class NavComp extends Component {
         return (  
             <Router>
                 <Navbar className='App-nav' bg="dark" variant="dark">
-                    <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/'>Home</NavLink></Nav.Link>
                     <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/listings'>Listings</NavLink></Nav.Link>
 
                     {isAuthenticated ? authLinks : guestLinks }
@@ -97,7 +96,7 @@ class NavComp extends Component {
 
                 </Navbar>
                 <Switch>
-                    <Route exact path = '/' component={ Home } />
+                    {/* <Route exact path = '/' component={ Home } /> */}
                     <Route exact path = '/listings' component={ Listings } />
                     <Route exact path = '/users/login' component={ Login } />
                     <Route exact path = '/users/register' component={ Register } />

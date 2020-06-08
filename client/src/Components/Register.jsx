@@ -9,7 +9,6 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { Form, Card, Button } from 'react-bootstrap';
 
-
 const FormWrapper = styled.section`
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +43,7 @@ const CardTitle = styled.h1`
     display: flex;
     font-weight: bold;
     justify-content: center;
-    margin: 1rem 2rem 1rem 2rem;
+    margin: 1rem 2rem 0.25rem 2rem;
 `;
 
 class Register extends Component {
