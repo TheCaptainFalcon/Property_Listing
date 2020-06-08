@@ -118,7 +118,6 @@ class Update extends Component {
                                 <Form.Group controlId="formGridAddress1">
                                     <BoldLabel>Address</BoldLabel>
                                     <Form.Control 
-                                        placeholder="Address" 
                                         name='address'
                                         className={classnames({ 'is-invalid' : errors.address})}
                                         type='varchar'
@@ -133,7 +132,6 @@ class Update extends Component {
                                     <Form.Group as={Col} controlId="formGridCity">
                                         <BoldLabel>City</BoldLabel>
                                         <Form.Control 
-                                            placeholder="City" 
                                             name='city'
                                             className={classnames({ 'is-invalid' : errors.city})}
                                             type='text'
@@ -147,7 +145,6 @@ class Update extends Component {
                                     <Form.Group as={Col} controlId="formGridState">
                                         <BoldLabel>State</BoldLabel>
                                             <Form.Control 
-                                                placeholder="State"
                                                 name='state'
                                                 className={classnames({ 'is-invalid' : errors.state})}
                                                 type='text'
@@ -161,7 +158,6 @@ class Update extends Component {
                                     <Form.Group as={Col} controlId="formGridZip">
                                         <BoldLabel>Zip</BoldLabel>
                                             <Form.Control 
-                                                placeholder="Zipcode"
                                                 name='zip'
                                                 className={classnames({ 'is-invalid' : errors.zip})}
                                                 type='number'
@@ -176,8 +172,7 @@ class Update extends Component {
                                 <Form.Row>
                                     <Form.Group as={Col} controlId="formGridBr">
                                         <BoldLabel>BR</BoldLabel>
-                                            <Form.Control 
-                                                placeholder="# of Bedrooms"
+                                            <Form.Control
                                                 name='br'
                                                 className={classnames({ 'is-invalid' : errors.br})}
                                                 type='number'
@@ -191,7 +186,6 @@ class Update extends Component {
                                     <Form.Group as={Col} controlId="formGridBa">
                                         <BoldLabel>BA</BoldLabel>
                                             <Form.Control 
-                                                placeholder="# of Bathrooms"
                                                 name='ba'
                                                 className={classnames({ 'is-invalid' : errors.ba})}
                                                 type='number'
@@ -205,7 +199,6 @@ class Update extends Component {
                                     <Form.Group as={Col} controlId="formGridPrice">
                                         <BoldLabel>Price</BoldLabel>
                                             <Form.Control 
-                                                placeholder="Price"
                                                 name='price'
                                                 className={classnames({ 'is-invalid' : errors.price})}
                                                 type='number'
