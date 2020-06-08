@@ -5,7 +5,8 @@ const express = require('express'),
     mongoose = require('mongoose'),
     keys = require('./config/dev'),
     passport = require('passport'),
-    cors = require('cors');
+    cors = require('cors'),
+    path = require('path');
 
 
 const corsOptions = {
@@ -21,8 +22,6 @@ const corsOptions = {
 const indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users');
     listingsRouter = require('./routes/listings');
-
-    
     
 const app = express();
 
@@ -36,6 +35,16 @@ app.use(cors(corsOptions));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use ('/listings', listingsRouter);
+
+// Server static assets if in production
+if(process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
