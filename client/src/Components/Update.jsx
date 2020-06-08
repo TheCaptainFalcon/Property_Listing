@@ -37,8 +37,9 @@ const ButtonWrapper = styled.div`
     margin: 0.5rem auto 1rem auto;
 `;
 
-const CardTitle = styled.h4`
+const CardTitle = styled.h1`
     display: flex;
+    font-weight: bold;
     justify-content: center;
     margin-top: 1rem;
     margin-bottom: 3rem;
