@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
-
+import './CSS/NavComp.css';
 import Home from './Home';
 import Listings from './Listings';
 import Login from './Login';
@@ -54,27 +54,28 @@ class NavComp extends Component {
     
 
     render() { 
-        const { isAuthenticated, user } = this.props.auth;
+        const { isAuthenticated } = this.props.auth;
         const seconds = this.state.seconds;
 
         const authLinks = (
             <Navbar className='App-nav' bg="dark" variant="dark">
-                <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/listings/update'>Update Listings</NavLink></Nav.Link>
-                <Nav.Link><NavLink onClick={this.handleLogout} to='/'>Logout</NavLink></Nav.Link>
+                <NavLink className="App-nav-link" activeClassName='active-link' exact={true} to='/listings/update'>Update Listings</NavLink>
+                <NavLink className="App-nav-link" onClick={this.handleLogout} to='/'>Logout</NavLink>
             </Navbar>
         );
 
         const guestLinks = (
             <Navbar className='App-nav' bg="dark" variant="dark">
-                <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/users/register'>Register</NavLink></Nav.Link>
-                <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/users/login'>Login</NavLink></Nav.Link>
+                <NavLink className="App-nav-link" activeClassName='active-link' exact={true} to='/users/register'>Register</NavLink>
+                <NavLink className="App-nav-link" activeClassName='active-link' exact={true} to='/users/login'>Login</NavLink>
             </Navbar>
         );
 
         return (  
             <Router>
                 <Navbar className='App-nav' bg="dark" variant="dark">
-                    <Nav.Link><NavLink activeClassName='active-link' exact={true} to='/listings'>Listings</NavLink></Nav.Link>
+                    <NavLink className="App-nav-link" activeClassName='active-link' exact={true} to='/'>Home</NavLink>
+                    <NavLink className="App-nav-link" activeClassName='active-link' exact={true} to='/listings'>Listings</NavLink>
 
                     {isAuthenticated ? authLinks : guestLinks }
 
@@ -96,7 +97,7 @@ class NavComp extends Component {
 
                 </Navbar>
                 <Switch>
-                    {/* <Route exact path = '/' component={ Home } /> */}
+                    <Route exact path = '/' component={ Home } />
                     <Route exact path = '/listings' component={ Listings } />
                     <Route exact path = '/users/login' component={ Login } />
                     <Route exact path = '/users/register' component={ Register } />

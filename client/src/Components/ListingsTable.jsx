@@ -65,8 +65,8 @@ class ListingsTable extends Component {
         const { isAuthenticated } = this.props.auth;
 
         return (  
-            <>
-            <br/>
+            <>  
+                <br/>
                 <tr>
                     <BoldTD>Address</BoldTD>
                     <BoldTD>City</BoldTD>
