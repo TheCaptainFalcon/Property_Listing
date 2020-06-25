@@ -1,18 +1,27 @@
 # Property Listing App
 
-### Login
-(gif)
+### Login + Listing Deletion and Logout Modal Behavior
+![](Login-Listing.gif)
 
 ### Posting and Obtaining Listings
-(gif)
+![](Property-Post.gif)
+
+### Validation Samples
+![](Register-Validation.png)
+
+![](Listings-Validation.png)
 
 ## Description:
 
-This mini project is an application that focuses on a small scale version of a Real Estate Multiple Listing Service (MLS) for personal usage. It currently provides a base template that can easily scale based on needs or requirements. This project was originally built with having only 1 authenticated user in mind, therefore, listings removal are not limited to associated users.
+This mini project is an application that focuses on a small scale version of a Real Estate Multiple Listing Service (MLS) for personal usage. It currently provides a base template that can easily scale based on needs or requirements. 
+
+This project was originally built with having only 1 authenticated user in mind, therefore, listings removal are not limited to associated users.
 
 ## Purpose: 
 
-This project was built as a means to tackle user authentication through Passport JSON Web Tokens (JWT) and Bearer tokens, as a previous project using Passport Google Strategy felt a bit clunky and messy. In addition, modals and timer based events were a front end feature that was unmet during the previous project, and have successfully been added here.
+This project was built as a means to tackle user authentication through Passport JSON Web Tokens (JWT) and Bearer tokens, as a previous project using Passport Google Strategy felt a bit clunky and messy. 
+
+In addition, modals and timer based events were a front end feature that was unmet during the previous project, and have successfully been added here.
 
 ## Main Features:
 
